@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_exe/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +65,11 @@ class _IntroPageState extends State<IntroPage> {
               ),
             ),
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const LoginPage(),)
+                );
+              },
               backgroundColor: Colors.yellow.shade300,
               child: const Icon(Icons.arrow_forward),
             )

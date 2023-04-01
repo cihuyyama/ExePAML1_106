@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:pokedex_exe/home_page.dart';
 import 'package:pokedex_exe/main.dart';
+import 'package:pokedex_exe/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -83,10 +85,11 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         TextFormField(
                           decoration: InputDecoration(
-                              hintText: 'Enter your Name',
-                              prefixIcon: const Icon(Icons.person)),
+                            hintText: 'Enter your Name',
+                            prefixIcon: const Icon(Icons.person),
+                          ),
                           validator: (value) {
-                            if (!value!.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your Name';
                             }
                             return null;
@@ -117,8 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         TextFormField(
                           validator: (value) {
-                            if (!value!.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your password';
+                            }
+                            else if(value.length<6){
+                              return 'Password must be at least 6 characters';
                             }
                             return null;
                           },
@@ -152,48 +158,40 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 255, 219, 5),
-                            onPrimary: Colors.white,
-                            fixedSize: Size(350, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(35)
-                            )
-                          ),
+                              primary: Color.fromARGB(255, 255, 219, 5),
+                              onPrimary: Colors.white,
+                              fixedSize: Size(350, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(35))),
                           child: const Text(
                             'Sign In',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17
-                            ),
+                                fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               _formkey.currentState!.save();
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => HomePage(
-                              //         name: name,
-                              //       ),
-                              //     ));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ));
                             }
+                            setState(() {});
                           },
                         )
                       ],
                     ),
                   ),
-
                   Container(
-                    margin: EdgeInsets.only(top: 15,left: 85),
+                    margin: EdgeInsets.only(top: 15, left: 85),
                     child: Row(
                       children: [
-                        Text.rich(
-                          TextSpan(
+                        Text.rich(TextSpan(
                             text: "Don't have an account? ",
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 186, 185, 187)
-                            ),
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 186, 185, 187)),
                             children: [
                               TextSpan(
                                 text: " Sign Up",
@@ -201,37 +199,18 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromARGB(255, 246, 201, 27),
                                 ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => RegisterPage(),)
+                                    );
+                                }
                               )
-                            ]
-                          )
-                        )
+                            ]))
                       ],
                     ),
                   )
-
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 15,left: 85),
-                  //   child: Row(
-                  //     children: [
-                  //       const Text(
-                  //         "Don't have an account? ",
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Color.fromARGB(255, 186, 185, 187)
-                  //         ),
-                  //       ),
-                  //       const Text(
-                  //         ' Sign Up',
-                          
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Color.fromARGB(255, 246, 201, 27),
-                            
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // )
                 ]),
               ),
             )));

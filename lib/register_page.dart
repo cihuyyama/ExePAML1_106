@@ -161,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                     margin: EdgeInsets.only(top: 15, left: 20),
                     child: Row(
-                      children: [
+                      children:  [
                         const Text(
                           "Password",
                           textAlign: TextAlign.left,

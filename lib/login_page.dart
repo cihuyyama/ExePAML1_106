@@ -33,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
               key: _formkey,
               child: SingleChildScrollView(
                 child: Column(children: <Widget>[
+
+                  //Assets
                   Container(
                     margin: const EdgeInsets.only(
                         top: 70, bottom: 10, left: 25, right: 25),
@@ -66,6 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
+                  //Name Form
                   Container(
                       margin: EdgeInsets.only(top: 15, left: 20),
                       child: Row(
@@ -101,6 +105,8 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+
+                  //PassForm
                   Container(
                       margin: EdgeInsets.only(top: 15, left: 20),
                       child: Row(
@@ -152,6 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+
+                  //Signin Button
                   Container(
                     margin: EdgeInsets.only(top: 70),
                     child: Column(
@@ -174,7 +182,9 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => HomePage(),
+                                    builder: (context) => HomePage(
+                                      name: name,
+                                    ),
                                   ));
                             }
                             setState(() {});
@@ -183,6 +193,8 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+
+                  //SignUp Tap
                   Container(
                     margin: EdgeInsets.only(top: 15, left: 85),
                     child: Row(

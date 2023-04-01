@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formkey = GlobalKey<FormState>();
   bool _passwordVisible = false;
+  bool _passwordVisible2 = false;
   final passcon = TextEditingController();
   final namecon = TextEditingController();
   String? name;
@@ -103,6 +104,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: 'Enter your Name',
                           prefixIcon: const Icon(Icons.email),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your Name';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          name = value;
+                        },
                       ),
                     ],
                   ),
@@ -131,6 +141,17 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: 'Enter your Email',
                           prefixIcon: const Icon(Icons.email),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your Email';
+                          } else if (!value.contains("@")) {
+                            return 'Invalid format email';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          email = value;
+                        },
                       ),
                     ],
                   ),
@@ -155,6 +176,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: passcon,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your password';
+                          } else if (value.length < 6) {
+                            return 'Password must be at least 6 characters';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          pass = value;
+                        },
                         obscureText: !_passwordVisible,
                         decoration: InputDecoration(
                           hintText: 'Enter your Password',
@@ -196,19 +229,32 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       TextFormField(
-                        obscureText: !_passwordVisible,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your password';
+                          } else if (value.length < 6) {
+                            return 'Password must be at least 6 characters';
+                          } else if (value != passcon.text) {
+                            return 'password must be the same';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          repass = value;
+                        },
+                        obscureText: !_passwordVisible2,
                         decoration: InputDecoration(
                           hintText: 'Re-Enter your Password',
                           prefixIcon: const Icon(Icons.lock),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _passwordVisible
+                              _passwordVisible2
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                             ),
                             onPressed: () {
                               setState(() {
-                                _passwordVisible = !_passwordVisible;
+                                _passwordVisible2 = !_passwordVisible2;
                               });
                             },
                           ),
